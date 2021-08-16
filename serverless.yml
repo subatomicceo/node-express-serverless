@@ -1,0 +1,26 @@
+org: subatomicceo
+app: aws-node-express-api-project
+service: aws-node-express-api-project
+
+frameworkVersion: '2'
+
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: '20201221'
+
+functions:
+  api:
+    handler: media/index.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: /{proxy+}
+          method: ANY
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
